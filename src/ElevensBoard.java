@@ -43,7 +43,7 @@ public class ElevensBoard {
     /**
      * Flag used to control debugging print statements.
      */
-    private static final boolean I_AM_DEBUGGING = false;
+    private static final boolean I_AM_DEBUGGING = true;
 
 
     /**
@@ -184,7 +184,13 @@ public class ElevensBoard {
      *         false otherwise.
      */
     public boolean isLegal(List<Integer> selectedCards) {
-
+        if (selectedCards.size() == 2) {
+            return containsPairSum11(selectedCards);
+        } else if (selectedCards.size() == 3) {
+            return containsJQK(selectedCards);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -196,7 +202,8 @@ public class ElevensBoard {
      *         false otherwise.
      */
     public boolean anotherPlayIsPossible() {
-        if
+        List<Integer> allIndexes = cardIndexes();
+        return containsPairSum11(allIndexes) || containsJQK(allIndexes);
     }
 
 
@@ -218,7 +225,16 @@ public class ElevensBoard {
      *              contain an 11-pair; false otherwise.
      */
     private boolean containsPairSum11(List<Integer> selectedCards) {
-        /* *** TO BE IMPLEMENTED  *** */
+        for (int i = 0; i < selectedCards.size(); i++) {
+            int k = selectedCards.get(i).intValue();
+            for (int i2 = i + 1; i2 < selectedCards.size(); i2++) {
+                int k2 = selectedCards.get(i2).intValue();
+                if (cardAt(k).getPointValue() + cardAt(k2).getPointValue() == 11) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -230,6 +246,19 @@ public class ElevensBoard {
      *              include a jack, a queen, and a king; false otherwise.
      */
     private boolean containsJQK(List<Integer> selectedCards) {
-        /* *** TO BE IMPLEMENTED  *** */
+        boolean containsJack = false;
+        boolean containsQueen = false;
+        boolean containsKing = false;
+        for (Integer kObj : selectedCards) {
+            int k = kObj.intValue();
+            if (cardAt(k).getRank().equals("J")) {
+                containsJack = true;
+            } else if (cardAt(k).getRank().equals("Q")) {
+                containsQueen = true;
+            } else if (cardAt(k).getRank().equals("K")) {
+                containsKing = true;
+            }
+        }
+        return containsJack && containsQueen && containsKing;
     }
 }
