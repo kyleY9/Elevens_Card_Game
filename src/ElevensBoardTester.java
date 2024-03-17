@@ -7,10 +7,10 @@ public class ElevensBoardTester
         // "I_AM_DEBUGGING is set to true
         ElevensBoard test = new ElevensBoard();
 
-        System.out.println("1. Intial Constructor: \n"+test);
+        System.out.println("1. Initial Constructor: \n"+ test);
 
         test.newGame();
-        System.out.println("2. After starting a new game\n"+test);
+        System.out.println("2. After starting a new game\n"+ test);
 
         System.out.println("3. Size of board = "+test.size());
 

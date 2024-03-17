@@ -15,13 +15,13 @@ public class ElevensBoard {
      * The ranks of the cards for this game to be sent to the deck.
      */
     private static final String[] RANKS =
-            {"ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"};
+            {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
     /**
      * The suits of the cards for this game to be sent to the deck.
      */
     private static final String[] SUITS =
-            {"spades", "hearts", "diamonds", "clubs"};
+            {"♠", "♥", "♦", "♣"};
 
     /**
      * The values of the cards for this game to be sent to the deck.
@@ -43,7 +43,7 @@ public class ElevensBoard {
     /**
      * Flag used to control debugging print statements.
      */
-    private static final boolean I_AM_DEBUGGING = true;
+    private static final boolean I_AM_DEBUGGING = false;
 
 
     /**
@@ -56,7 +56,6 @@ public class ElevensBoard {
             System.out.println(deck);
             System.out.println("----------");
         }
-        dealMyCards();
     }
 
     /**
@@ -149,9 +148,20 @@ public class ElevensBoard {
      * @return the string version of this board.
      */
     public String toString() {
-        String s = "";
+        String s = "  ";
+        for (int i = 0; i < cards.length; i++) {
+            if (i != cards.length - 1) {
+                s += i + "    ";
+            } else {
+                s += i + "\n";
+            }
+        }
         for (int k = 0; k < cards.length; k++) {
-            s = s + k + ": " + cards[k] + "\n";
+            if (k != cards.length - 1) {
+                s += cards[k] + ", ";
+            } else {
+                s += cards[k];
+            }
         }
         return s;
     }
